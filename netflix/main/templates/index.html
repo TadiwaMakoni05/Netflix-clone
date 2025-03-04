@@ -10,35 +10,32 @@
 
     
   </head>
-  <body class="bg-black">
+  <body class="bg-black overflow-x-hidden">
 
-    <header class="header w-[100vw] h-[90vh]" 
-    style="background: linear-gradient(to bottom, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.1)), 
-           url({% static '\assets\img\extraction.jpg' %}); 
-           background-size: cover; 
-           background-position: center; 
-           background-repeat: no-repeat;">
+    <header class="header w-[100vw] h-[90vh]">
 
-        <nav class="flex flex-row items-center justify-between p-8 nav-bar">
-            <div class="flex items-center logo">
+        <nav class="flex flex-row items-center justify-between p-8 nav-bar ">
+            
+            <div class="flex items-center logo place-self-start">
               <a href="#" class="text-white ">
               <img
                 src="{% static '\assets\img\netflix-logo.png' %}"
                 alt="netflix-logo"
-                class="flex justify-start w-[150px]"
+                class="flex justify-start w-[80px] md:w-[150px] "
               />
             </a>
             </div>
-      
-              <ul class="flex justify-between gap-6 nav-links">
-                <li class="text-white nav-link hover:text-red-500">Homy</li>
+            <input type="checkbox" name="" id="" class="peer z-10 toggle-nav md:hidden lg:hidden" >
+              <ul class="hidden flex-col md:flex lg:flex lg:flex-row  md:flex-row justify-between peer-checked:justify-start peer-checked:p-6 peer-checked:z-[5] gap-2 md:gap-6 nav-links peer-checked:flex peer-checked:fixed peer-checked:top-0 peer-checked:left-0 peer-checked:w-[100vh] peer-checked:h-[100dvh] peer-checked:bg-black">
+                <li class="text-white nav-link hover:text-red-500">Home</li>
                 <li class="text-white nav-link hover:text-red-500">TV Shows</li>
                 <li class="text-white nav-link hover:text-red-500">Movies</li>
                 <li class="text-white nav-link hover:text-red-500">New & Popular</li>
                 <li class="text-white nav-link hover:text-red-500">My List</li>
                 <li class="text-white nav-link hover:text-red-500">Browse by Languages</li>
               </ul>
-            <div class="flex auth-container">
+              
+            <div class="auth-container hidden md:flex">
               <ul class="flex justify-between gap-4">
                 <li><i class="text-xl text-white bi bi-search hover:text-red-500"></i></li>
                 <li><i class="text-xl text-white bi bi-bell hover:text-red-500"></i></li>
@@ -48,8 +45,8 @@
             </div>
           </nav>
           
-          <div class="flex flex-col w-1/2 gap-6 p-20 my-10 movie-info">
-            <h1 class="font-extrabold text-white text-8xl">Extraction</h1>
+          <div class='flex flex-col gap-6 px-10 py-0 my-10 lg:w-1/2 md:w-full movie-info'>
+            <h1 class="font-extrabold text-white lg:text-8xl md:text-4xl text-2xl">Extraction</h1>
             <small class="text-xs text-white">2020 | PG-13</small>
             <p class="space-x-2 text-lg text-white">
               Ovi Mahajan Jr., son of incarcerated Indian drug lord Ovi Mahajan Sr., sneaks out of his house to visit a club with his friend. At the party, they go to the garage to have a smoke, where they encounter corrupt police officers working for rival Bangladeshi drug lord Amir Asif. They shoot and kill Ovi Jr.'s friend and kidnap him
@@ -89,12 +86,14 @@
           <div id="scroll-container" class="flex p-2 space-x-4 overflow-x-auto no-scrollbar scroll-smooth snap-x snap-mandatory">
               
               {% for movie in upcoming %}
-              <div class="relative flex items-center justify-center flex-shrink-0 w-64 h-40 text-xl text-white group">
-                  <img src="{{movie.poster_path}}" alt="Lift" class="object-cover w-full h-full aspect-square">
-                  <div class="absolute bottom-0 flex items-center justify-center w-full text-lg font-semibold text-center text-white transition-all duration-300 h-1/3 bg-black/50 group-hover:h-full group-hover:bg-black/60">
-                      {{movie.title}}
-                  </div>
-              </div>
+              <a href="{% url 'watch_movie' movie.id %}">
+                <div class="relative flex items-center justify-center flex-shrink-0 w-64 h-40 text-xl text-white group">
+                    <img src="{{movie.poster_path}}" alt="Lift" class="object-cover w-full h-full aspect-square">
+                    <div class="absolute bottom-0 flex items-center justify-center w-full text-lg font-semibold text-center text-white transition-all duration-300 h-1/3 bg-black/50 group-hover:h-full group-hover:bg-black/60">
+                        {{movie.title}}
+                    </div>
+                </div>
+              </a>
               {% endfor %}
           </div>
       </div>
@@ -105,12 +104,14 @@
           <div id="scroll-container" class="flex p-2 space-x-4 overflow-x-auto no-scrollbar scroll-smooth snap-x snap-mandatory">
               
             {% for movie in popular %}
-            <div class="relative flex items-center justify-center flex-shrink-0 w-64 h-40 text-xl text-white group">
-                <img src="{{movie.poster_path}}" alt="Lift" class="object-cover w-full h-full aspect-square">
-                <div class="absolute bottom-0 flex items-center justify-center w-full text-lg font-semibold text-center text-white transition-all duration-300 h-1/3 bg-black/50 group-hover:h-full group-hover:bg-black/60">
-                    {{movie.title}}
-                </div>
-            </div>
+            <a href="{% url 'watch_movie' movie.id %}">
+              <div class="relative flex items-center justify-center flex-shrink-0 w-64 h-40 text-xl text-white group">
+                  <img src="{{movie.poster_path}}" alt="Lift" class="object-cover w-full h-full aspect-square">
+                  <div class="absolute bottom-0 flex items-center justify-center w-full text-lg font-semibold text-center text-white transition-all duration-300 h-1/3 bg-black/50 group-hover:h-full group-hover:bg-black/60">
+                      {{movie.title}}
+                  </div>
+              </div>
+            </a>
             {% endfor %}
           </div>
       </div>
@@ -122,12 +123,14 @@
           <div id="scroll-container" class="flex p-2 space-x-4 overflow-x-auto no-scrollbar scroll-smooth snap-x snap-mandatory">
               
             {% for movie in top_rated %}
-            <div class="relative flex items-center justify-center flex-shrink-0 w-64 h-40 text-xl text-white group">
-                <img src="{{movie.poster_path}}" alt="Lift" class="object-cover w-full h-full aspect-square">
-                <div class="absolute bottom-0 flex items-center justify-center w-full text-lg font-semibold text-center text-white transition-all duration-300 h-1/3 bg-black/50 group-hover:h-full group-hover:bg-black/60">
-                    {{movie.title}}
-                </div>
-            </div>
+            <a href="{% url 'watch_movie' movie.id %}">
+              <div class="relative flex items-center justify-center flex-shrink-0 w-64 h-40 text-xl text-white group">
+                  <img src="{{movie.poster_path}}" alt="Lift" class="object-cover w-full h-full aspect-square">
+                  <div class="absolute bottom-0 flex items-center justify-center w-full text-lg font-semibold text-center text-white transition-all duration-300 h-1/3 bg-black/50 group-hover:h-full group-hover:bg-black/60">
+                      {{movie.title}}
+                  </div>
+              </div>
+            </a>
             {% endfor %}
               
           </div>
@@ -145,11 +148,11 @@
         <img
           src="{% static '/assets/img/netflix-logo.png' %}"
           alt="netflix-logo"
-          class="flex justify-start w-[250px]"
+          class="flex justify-start w-[80px] md:w-[250px]"
         />
       </div>
       <div>
-        <ul class="flex gap-8 my-8 ">
+        <ul class="flex flex-row  gap-8 my-8 md:flex md:gap-8 md:my-8 ">
           <li><a href="#"><i class="text-4xl text-white hover:text-red-500 bi bi-facebook"></i></a></li>
           <li><a href="#"><i class="text-4xl text-white hover:text-red-500 bi bi-instagram"></i></a></li>
           <li><a href="#"><i class="text-4xl text-white hover:text-red-500 bi bi-twitter"></i></a></li>
@@ -157,8 +160,8 @@
         </ul>
       </div>
 
-      <div class="grid grid-cols-4 gap-12 footer-links">
-        <ul class="flex flex-col gap-5">
+      <div class="md:grid md:grid-cols-4 md:gap-12 footer-links grid grid-rows-2 gap-2">
+        <ul class="flex flex-col gap-5 ">
           <li><a href="#" class="text-white hover:text-red-500">Audio Description</a></li>
           <li><a href="#" class="text-white hover:text-red-500">Investor Relations</a></li>
           <li><a href="#" class="text-white hover:text-red-500">Legal Notices</a></li>

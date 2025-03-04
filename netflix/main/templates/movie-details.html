@@ -11,15 +11,17 @@
 <body class="bg-black">
     <main class="main">
         <nav class="p-2 nav-bar">
-            <img src="{% static '/assets/img/netflix-logo.png' %}" alt="netflix-logo" class="flex justify-start  w-[200px]">
+            <img src="{% static '/assets/img/netflix-logo.png' %}" alt="netflix-logo" class="flex justify-start  w-[80px] md:w-[150px]">
         </nav>
-        <div class="movie-container">
+        <div class="movie-container m-10">
             <div class="grid movie-iframe place-self-center">
-                <iframe src="https://www.youtube.com/embed/{{ movie.key }}" class="w-[100vw] h-[90vh]"  title="Movie" controls></iframe>
+                <iframe src="https://www.youtube.com/embed/{{ movie.key }}" class="md:w-[100dvw] md:h-[100dvh] w-full h-[100vh] lg:w-[100dvw] lg:h-[100dvh]"  title="Movie" controls></iframe>
             </div>
-            <div class="movie-info">
-                <p class="text-white">{{movie.site}}</p>
-                <p></p>
+            <div class="movie-info m-5 md:flex md:flex-row md:justify-between flex flex-col justify-between gap-2">
+                <p class="text-white">Movie Site: {{movie.site}}</p>
+                <p class="text-white">{{movie.name}}</p>
+                <p class="text-white">{{movie.type}}</p>
+                <p class="text-white">Published At: {{movie.published_at}}</p>
             </div>
         </div>
     </main>

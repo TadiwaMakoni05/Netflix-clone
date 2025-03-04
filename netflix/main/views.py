@@ -1,7 +1,5 @@
 from django.shortcuts import render
 import requests
-
-
 # Create your views here.
 def get_now_playing_movies():
     now_playing_movies = []
@@ -12,8 +10,7 @@ def get_now_playing_movies():
     }
     response = requests.get(url, headers=headers)
     if response.status_code == 200:
-        data = response.json()  # Parse the JSON response
-        # Extract movie data
+        data = response.json()  
         results = data.get('results', [])
         for movie in results:
             movie_id = movie['id']
@@ -40,13 +37,15 @@ def get_popular_movies():
     }
     response = requests.get(url, headers=headers)
     if response.status_code == 200:
-        data = response.json()  
+        data = response.json() 
         results = data.get('results', [])
         for movie in results:
+            movie_id = movie['id']
             title = movie['title']
             overview =  movie['overview']
             poster_path = f"https://image.tmdb.org/t/p/w500{movie['poster_path']}"
             popular_movies.append({
+                'id':movie_id,
                 'title': title,
                 'overview' : overview,
                 'poster_path': poster_path
@@ -68,10 +67,12 @@ def get_top_rated_movies():
         data = response.json()  
         results = data.get('results', [])
         for movie in results:
+            movie_id = movie['id']
             title = movie['title']
             overview =  movie['overview']
             poster_path = f"https://image.tmdb.org/t/p/w500{movie['poster_path']}"
             top_rated_movies.append({
+                'id':movie_id,
                 'title': title,
                 'overview' : overview,
                 'poster_path': poster_path
@@ -93,12 +94,14 @@ def get_upcoming_movies():
         data = response.json()  
         results = data.get('results', [])
         for movie in results:
+            movie_id = movie['id']
             title = movie['title']
-            overview = movie['overview']
+            overview =  movie['overview']
             poster_path = f"https://image.tmdb.org/t/p/w500{movie['poster_path']}"
             upcoming_movies.append({
+                'id':movie_id,
                 'title': title,
-                'overview':overview,
+                'overview' : overview,
                 'poster_path': poster_path
             })
     else:
@@ -120,7 +123,7 @@ def watch_movie(request,movie_id):
     for video in data:
         if video["site"] == "YouTube":
             movie = video
-            # print(video, "--video here")
+            print(video, "--video here")
             return render(request,'movie-details.html',{'movie':movie})
         else:
             print("Failed to fetch data")

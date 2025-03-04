@@ -2,47 +2,68 @@
 @tailwind components;
 @tailwind utilities;
 
-.hero-banner{
-    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.3)), url('/assets/img/hero.png');
+.hero-banner {
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.3)),
+    url("/assets/img/hero.png");
 }
-/* header{
-    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.3)), url('/assets/img/extraction.jpg');
-    background-size: cover;
-} */
+.header {
+  background: linear-gradient(
+      to bottom,
+      #000000b3,
+      rgba(0, 0, 0, 0.5),
+      rgba(0, 0, 0, 0.1)
+    ),
+    url("./../img/jump-dive.gif");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
 
-input{
-    @apply bg-transparent  p-3 border rounded focus:ring-1 placeholder:text-slate-400 placeholder:italic text-white
+input.toggle-nav{
+    appearance: none;
+}
+input.toggle-nav:checked::before{
+    content: "X";
+    transform: none;
+}
+input.toggle-nav::before{
+    content: "|||";
+    display: block;
+    transform: rotateZ(90deg);
 }
 
-li{
-    @apply no-underline
+input {
+  @apply bg-transparent  p-3 border rounded focus:ring-1 placeholder:text-slate-400 placeholder:italic text-white;
 }
 
-*{
-    padding: 0;
-    margin: 0;
-    box-sizing: border-box;
+li {
+  @apply no-underline;
 }
-.swiper-slide{
-    position: relative;
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+.swiper-slide {
+  position: relative;
 }
 .swiper-slide p {
-    position: absolute ;
-    bottom: 0;
-    left: 0;
+  position: absolute;
+  bottom: 0;
+  left: 0;
 }
 .swiper-slide img {
-    height: 300px;
-    width: 100%;
-    max-width: 250px;
-    display: block;
+  height: 300px;
+  width: 100%;
+  max-width: 250px;
+  display: block;
 }
 
-
-        .no-scrollbar::-webkit-scrollbar {
-            display: none;
-        }
-        .no-scrollbar {
-            -ms-overflow-style: none;  
-            scrollbar-width: none;  
-        } 
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
