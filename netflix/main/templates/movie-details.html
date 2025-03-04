@@ -1,0 +1,27 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Movie Deatils</title>
+    <link rel="stylesheet" href="{% static 'assets/css/wind.css' %}" />
+
+</head>
+<body class="bg-black">
+    <main class="main">
+        <nav class="p-2 nav-bar">
+            <img src="{% static '/assets/img/netflix-logo.png' %}" alt="netflix-logo" class="flex justify-start  w-[200px]">
+        </nav>
+        <div class="movie-container">
+            <div class="grid movie-iframe place-self-center">
+                <iframe src="https://www.youtube.com/embed/{{ movie.key }}" class="w-[100vw] h-[90vh]"  title="Movie" controls></iframe>
+            </div>
+            <div class="movie-info">
+                <p class="text-white">{{movie.site}}</p>
+                <p></p>
+            </div>
+        </div>
+    </main>
+</body>
+</html>
