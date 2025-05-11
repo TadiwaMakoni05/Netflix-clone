@@ -1,11 +1,20 @@
 from django.shortcuts import render
 import requests
 # Create your views here.
+
+def signin(request):
+    return render(request,'signin.html')
+
+def signup(request):
+    return render(request,'signup.html')
+
 def get_now_playing_movies():
     now_playing_movies = []
     url = "https://api.themoviedb.org/3/movie/now_playing?language=en-US&page=1"
     headers = {
         "accept": "application/json",
+        # "Cache-Control": "no-cache, no-store, must-revalidate" , # Prevent external caches
+
         "Authorization": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI0NWNlYWM0NTgxZDM5YjYyZTRkZDllM2I5ZTFjNzk3YyIsIm5iZiI6MTcxMjQ5Mjg1NC4yNDMsInN1YiI6IjY2MTI5MTM2MWYzMzE5MDE3ZGMzMTQyYiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.fP5dr2vCz3ZC6DYLVzuMvQrU-qYMFbkkdDHVZb2nbnI" 
     }
     response = requests.get(url, headers=headers)
@@ -33,6 +42,7 @@ def get_popular_movies():
     url = "https://api.themoviedb.org/3/movie/popular?language=en-US&page=1"
     headers = {
         "accept": "application/json",
+        "Cache-Control": "no-cache, no-store, must-revalidate",  # Prevent external caches
         "Authorization": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI0NWNlYWM0NTgxZDM5YjYyZTRkZDllM2I5ZTFjNzk3YyIsIm5iZiI6MTcxMjQ5Mjg1NC4yNDMsInN1YiI6IjY2MTI5MTM2MWYzMzE5MDE3ZGMzMTQyYiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.fP5dr2vCz3ZC6DYLVzuMvQrU-qYMFbkkdDHVZb2nbnI"
     }
     response = requests.get(url, headers=headers)
@@ -60,6 +70,7 @@ def get_top_rated_movies():
     url = "https://api.themoviedb.org/3/movie/top_rated?language=en-US&page=1"
     headers = {
         "accept": "application/json",
+        "Cache-Control": "no-cache, no-store, must-revalidate" , # Prevent external caches
         "Authorization": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI0NWNlYWM0NTgxZDM5YjYyZTRkZDllM2I5ZTFjNzk3YyIsIm5iZiI6MTcxMjQ5Mjg1NC4yNDMsInN1YiI6IjY2MTI5MTM2MWYzMzE5MDE3ZGMzMTQyYiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.fP5dr2vCz3ZC6DYLVzuMvQrU-qYMFbkkdDHVZb2nbnI"
     }
     response = requests.get(url, headers=headers)
@@ -70,7 +81,7 @@ def get_top_rated_movies():
             movie_id = movie['id']
             title = movie['title']
             overview =  movie['overview']
-            poster_path = f"https://image.tmdb.org/t/p/w500{movie['poster_path']}"
+            poster_path = f"https://image.tmdb.org/t/p/original{movie.get('poster_path')}" if movie.get('poster_path') else '/assets/img/404.png'
             top_rated_movies.append({
                 'id':movie_id,
                 'title': title,
@@ -87,6 +98,7 @@ def get_upcoming_movies():
     url = "https://api.themoviedb.org/3/movie/top_rated?language=en-US&page=1"
     headers = {
         "accept": "application/json",
+        "Cache-Control": "no-cache, no-store, must-revalidate",  # Prevent external caches
         "Authorization": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI0NWNlYWM0NTgxZDM5YjYyZTRkZDllM2I5ZTFjNzk3YyIsIm5iZiI6MTcxMjQ5Mjg1NC4yNDMsInN1YiI6IjY2MTI5MTM2MWYzMzE5MDE3ZGMzMTQyYiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.fP5dr2vCz3ZC6DYLVzuMvQrU-qYMFbkkdDHVZb2nbnI"
     }
     response = requests.get(url, headers=headers)
@@ -97,7 +109,8 @@ def get_upcoming_movies():
             movie_id = movie['id']
             title = movie['title']
             overview =  movie['overview']
-            poster_path = f"https://image.tmdb.org/t/p/w500{movie['poster_path']}"
+            poster_path = f"https://image.tmdb.org/t/p/original{movie['poster_path']}"
+
             upcoming_movies.append({
                 'id':movie_id,
                 'title': title,
