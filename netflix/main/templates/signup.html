@@ -5,17 +5,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Signup</title>
-    <link rel="stylesheet" href="{% static 'assets/css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/wind.css' %}">
 </head>
 <body>
     <div class="hero-banner w-[100vw] h-[100vh] bg-cover ">
-        <nav class="p-12 nav-bar">
-            <img src="{% static '/assets/img/netflix-logo.png' %}" alt="netflix-logo" class="flex justify-start  w-[200px]">
+        <nav class="p-10 nav-bar">
+            <img src="{% static '/assets/img/netflix-logo.png' %}" alt="netflix-logo" class="flex justify-start  w-[100px]">
         </nav>
         <div class="grid signup-container place-self-center">
-            <div class="signup-section bg-black w-[400px]  flex flex-col content-center p-8">
+            <div class="signup-section bg-black w-[400px]  flex flex-col content-center p-5">
                 <h1 class="text-3xl font-bold text-center text-white">Signup</h1>
                 <form class="flex flex-col p-9">
+                    {% csrf_token %}
                     <label for="email" class="my-2 font-medium text-white">Email:</label>
                     <input type="email" name="email" id="email" placeholder="Enter Email...">
                     <label for="username" class="my-2 font-medium text-white">Username:</label>
@@ -26,7 +27,7 @@
                     <input type="password" name="password2" id="password2" placeholder="Enter Password...">
 
                     <button class="w-full px-2 py-4 my-4 font-bold text-white bg-red-600 rounded" type="submit">Signup</button>
-                    <p class="text-white "> Already have an account? <a href="#" class="font-bold text-red-500">Login</a></p>
+                    <p class="text-white "> Already have an account? <a href="{% url 'signin' %}" class="font-bold text-red-500">Sigin</a></p>
                 </form>
             </div>
         </div>  

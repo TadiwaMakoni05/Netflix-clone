@@ -5,25 +5,25 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Signin</title>
-    <link rel="stylesheet" href="{% static 'assets/css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/wind.css' %}">
 </head>
 <body>
     <div class="hero-banner w-[100vw] h-[100vh] bg-cover ">
-        <nav class="p-12 nav-bar">
-            <img src="{% static '/assets/img/netflix-logo.png' %}" alt="netflix-logo" class="flex justify-start  w-[200px]">
+        <nav class="p-10 nav-bar">
+            <img src="{% static '/assets/img/netflix-logo.png' %}" alt="netflix-logo" class="flex justify-start  w-[100px]">
         </nav>
         <div class="grid signup-container place-self-center">
             <div class="signup-section bg-black w-[400px]  flex flex-col content-center p-8">
                 <h1 class="text-3xl font-bold text-center text-white">Signin</h1>
-                <form class="flex flex-col p-9">
-
+                <form class="flex flex-col p-9" method ='post'>
+                    {% csrf_token %}
                     <label for="username" class="my-2 font-medium text-white">Username:</label>
                     <input type="text" name="username" id="username" placeholder="Enter Username...">
                     <label for="password" class="my-2 font-medium text-white">Password:</label>
                     <input type="password" name="password" id="username" placeholder="Enter Password...">
 
                     <button class="w-full px-2 py-4 my-4 font-bold text-white bg-red-600 rounded" type="submit">Signin</button>
-                    <p class="text-white "> Don't have an account? <a href="#" class="font-bold text-red-500">Signup</a></p>
+                    <p class="text-white"> Don't have an account? <a href="{% url 'signup' %}" class="font-bold text-red-500">Signup</a></p>
                 </form>
             </div>
         </div>  
